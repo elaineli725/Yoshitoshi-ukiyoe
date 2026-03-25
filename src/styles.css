@@ -1,0 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Noto+Serif+SC:wght@500;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply m-0 bg-ink font-sansCn text-moon antialiased;
+  background-image: radial-gradient(circle at 20% 10%, rgba(143, 155, 181, 0.16), transparent 40%);
+}
+
+.paper {
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0, rgba(255, 255, 255, 0.06) 1px, transparent 1px, transparent 4px),
+    radial-gradient(circle at 20% 30%, rgba(255, 255, 255, 0.18), transparent 35%);
+}
