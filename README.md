@@ -40,3 +40,13 @@ moon -100.jpg
 ```
 
 > 备注：代码中已使用 `encodeURI` 处理文件名里的空格。
+
+## GitHub Pages 空白页修复说明
+
+如果你部署在 `https://<user>.github.io/<repo>/`，请使用 Hash 路由（本项目已切换），访问地址会变成：
+
+```text
+https://<user>.github.io/<repo>/#/ 
+```
+
+这样刷新或直达子页面（如 `#/works/w001`）也不会出现白屏。
