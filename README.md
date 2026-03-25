@@ -70,3 +70,5 @@ https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/works/w001
 ```
 
 如果仍然空白：按 `Ctrl + F5` 强刷，或在浏览器开发者工具里查看 Console / Network 是否有 `assets/*.js` 404。
+
+> 若运行时发生异常，页面会显示“页面加载失败”提示（而非纯白屏），请把该提示中的错误信息发出来。
