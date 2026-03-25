@@ -37,16 +37,33 @@ const phaseFromIndex = (idx) => {
   return { phase: '1889–1892', year: `${1889 + ((idx - 76) % 4)}` };
 };
 
+const buildImageCandidates = (index) => {
+  const id = String(index).padStart(3, '0');
+  return [
+    `/images/works/moon -${index}.jpg`,
+    `/images/works/moon-${index}.jpg`,
+    `/images/works/w${id}.jpg`,
+    `/images/works/w${id}.jpeg`,
+    `/images/works/w${id}.png`,
+    `/images/works/${id}.jpg`,
+    `/images/works/${id}.jpeg`,
+    `/images/works/${id}.png`
+  ].map((item) => encodeURI(item));
+};
+
 const allWorks = Array.from({ length: 100 }, (_, i) => {
   const index = i + 1;
   const phaseMeta = phaseFromIndex(index);
+  const imageCandidates = buildImageCandidates(index);
+
   return {
     id: `w${String(index).padStart(3, '0')}`,
     title: `月百姿 第${index}幅`,
     year: phaseMeta.year,
     phase: phaseMeta.phase,
     desc: `《月百姿》占位说明：第 ${index} 幅，后续可替换为正式作品标题与策展文本。`,
-    image: encodeURI(`/images/works/moon -${index}.jpg`)
+    imageCandidates,
+    image: imageCandidates[0]
   };
 });
 
@@ -67,21 +84,29 @@ const sectionMotion = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
 };
 
-function ArtworkImage({ src, alt, className }) {
-  const [error, setError] = useState(false);
+function ArtworkImage({ src, srcList = [], alt, className }) {
+  const candidates = srcList.length > 0 ? srcList : src ? [src] : [];
+  const [index, setIndex] = useState(0);
+
+  const currentSrc = candidates[index];
+  const exhausted = !currentSrc;
 
   return (
-    <div className={`relative overflow-hidden rounded-lg border border-haze/20 bg-gradient-to-b from-haze/15 via-panel to-ink ${className}`}>
-      {!error ? (
+    <div className={`relative overflow-hidden rounded-lg border border-haze/30 bg-gradient-to-b from-paper to-panel/80 ${className}`}>
+      {!exhausted ? (
         <img
-          src={src}
+          src={currentSrc}
           alt={alt}
           className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
           loading="lazy"
-          onError={() => setError(true)}
+          onError={() => setIndex((prev) => prev + 1)}
         />
       ) : (
-        <div className="grid h-full w-full place-content-center text-xs text-moon/70">图片未找到</div>
+        <div className="grid h-full w-full place-content-center text-center text-xs leading-6 text-haze">
+          图片未找到
+          <br />
+          请检查 public/images/works 下文件名
+        </div>
       )}
     </div>
   );
@@ -93,7 +118,7 @@ function WorkCard({ work, compact = false }) {
       whileHover={{ y: -4 }}
       className="group rounded-xl border border-haze/20 bg-panel/65 p-4 transition-all duration-500 hover:border-gold/50 hover:shadow-moon"
     >
-      <ArtworkImage src={work.image} alt={work.title} className={compact ? 'mb-3 h-32' : 'mb-4 h-44'} />
+      <ArtworkImage srcList={work.imageCandidates} alt={work.title} className={compact ? 'mb-3 h-32' : 'mb-4 h-44'} />
       <div className="space-y-2">
         <div className="flex items-center justify-between gap-3">
           <h3 className="font-serifCn text-lg">{work.title}</h3>
@@ -131,7 +156,7 @@ function WorkDetail() {
         <p className="text-sm tracking-[0.2em] text-haze">{work.phase}</p>
         <h1 className="mt-3 font-serifCn text-4xl">{work.title}</h1>
         <p className="mt-2 text-moon/70">{work.year}</p>
-        <ArtworkImage src={work.image} alt={work.title} className="mt-8 h-72" />
+        <ArtworkImage srcList={work.imageCandidates} alt={work.title} className="mt-8 h-72" />
         <p className="mt-8 leading-8 text-moon/85">{work.desc}</p>
         <Link to="/" className="mt-8 inline-flex rounded-full border border-gold/40 px-5 py-2 text-sm hover:bg-gold/10">返回展览首页</Link>
       </div>
@@ -150,8 +175,8 @@ function HomePage() {
   );
 
   return (
-    <div className="bg-ink text-moon">
-      <header className="fixed inset-x-0 top-0 z-50 border-b border-haze/15 bg-ink/80 backdrop-blur">
+    <div className="bg-paper text-moon">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-haze/15 bg-paper/90 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
           <a href="#hero" className="font-serifCn text-lg">月百姿</a>
           <button className="md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="menu">
@@ -165,7 +190,7 @@ function HomePage() {
         </div>
         <AnimatePresence>
           {mobileOpen && (
-            <motion.nav initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="border-t border-haze/20 bg-ink/95 p-3 md:hidden">
+            <motion.nav initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="border-t border-haze/20 bg-paper/95 p-3 md:hidden">
               {navItems.map(([label, itemId]) => (
                 <a key={itemId} href={`#${itemId}`} onClick={() => setMobileOpen(false)} className="block py-2 text-sm text-moon/80">{label}</a>
               ))}
@@ -175,7 +200,7 @@ function HomePage() {
       </header>
 
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
-        <motion.section id="hero" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative overflow-hidden rounded-3xl border border-haze/20 bg-gradient-to-b from-panel via-ink to-ink px-8 py-20 sm:px-14">
+        <motion.section id="hero" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative overflow-hidden rounded-3xl border border-haze/20 bg-gradient-to-b from-panel via-paper to-paper px-8 py-20 sm:px-14">
           <div className="paper absolute inset-0 opacity-25" />
           <div className="relative max-w-3xl space-y-6">
             <p className="font-serifCn text-6xl leading-tight sm:text-7xl">月百姿</p>
@@ -241,7 +266,7 @@ function HomePage() {
 
         <motion.section id="all-works" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-24">
           <h2 className="mb-6 font-serifCn text-3xl">全部作品（100）</h2>
-          <p className="mb-6 text-sm text-moon/70">已按你上传的文件命名规则读取：/images/works/moon -1.jpg 至 moon -100.jpg。</p>
+          <p className="mb-6 text-sm text-moon/70">已自动尝试多种命名：moon -1.jpg、moon-1.jpg、w001.jpg / .jpeg / .png。</p>
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {allWorks.map((work) => <WorkCard key={work.id} work={work} compact />)}
           </div>
