@@ -57,7 +57,7 @@ w001.jpg / w001.jpeg / w001.png
 ### 已修复项
 
 - 路由使用 `HashRouter`，避免刷新子路由 404。
-- Vite 使用 `base: './'`，打包资源路径为相对路径，适配项目站点/自定义域名。
+- Vite 使用 `base: '/Yoshitoshi-ukiyoe/'`，确保项目页路径下静态资源不会 404。
 - Pages 工作流改为 `npm install`（此前 `npm ci` 会因为缺少 `package-lock.json` 直接失败，导致页面不更新）。
 
 ### 你需要确认
@@ -69,8 +69,10 @@ w001.jpg / w001.jpeg / w001.png
 5. 用这个地址打开：
 
 ```text
-https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/
+https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/（必须带 /Yoshitoshi-ukiyoe/ 这段路径）
 ```
+
+不要访问根地址 `https://elaineli725.github.io/`，否则静态资源会 404。
 
 详情页示例：
 
