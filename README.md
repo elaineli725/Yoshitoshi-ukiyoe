@@ -41,33 +41,31 @@ moon -100.jpg
 
 > 备注：代码中已使用 `encodeURI` 处理文件名里的空格。
 
-## GitHub Pages 空白页修复说明
+## GitHub Pages 空白页排查（重点）
 
-出现“白屏/完全空白”通常有两个原因：
+出现“页面完全空白（白屏）”最常见是部署未成功，而不是样式问题。
 
-1. 把源码直接发布了（`index.html` 还在引用 `src/main.jsx`），浏览器无法直接运行 React 源码。
-2. Vite 打包后的资源路径没有设置 repo base，导致 `/assets/...` 404。
+### 已修复项
 
-本项目已修复：
+- 路由使用 `HashRouter`，避免刷新子路由 404。
+- Vite 使用 `base: './'`，打包资源路径为相对路径，适配项目站点/自定义域名。
+- Pages 工作流改为 `npm install`（此前 `npm ci` 会因为缺少 `package-lock.json` 直接失败，导致页面不更新）。
 
-- 使用 `HashRouter`（前端路由不依赖服务器 rewrite）。
-- 新增 `vite.config.js` 并设置 `base: '/Yoshitoshi-ukiyoe/'`。
-- 新增 GitHub Actions 自动构建与部署工作流：`.github/workflows/deploy-pages.yml`。
+### 你需要确认
 
-### 正确访问方式
+1. GitHub → **Settings → Pages** → Source 选择 **GitHub Actions**。
+2. push 到 `main`。
+3. 打开 **Actions**，确认 `Deploy Vite site to GitHub Pages` 成功（绿色）。
+4. 用这个地址打开：
 
 ```text
 https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/
 ```
 
-作品详情页：
+详情页示例：
 
 ```text
 https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/works/w001
 ```
 
-### 你还需要在 GitHub 仓库里确认
-
-1. Settings → Pages → Source 选择 **GitHub Actions**。
-2. push 到 `main` 后等待 Actions 里 `Deploy Vite site to GitHub Pages` 成功。
-3. 成功后再刷新线上地址。
+如果仍然空白：按 `Ctrl + F5` 强刷，或在浏览器开发者工具里查看 Console / Network 是否有 `assets/*.js` 404。
