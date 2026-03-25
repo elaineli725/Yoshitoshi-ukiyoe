@@ -16,7 +16,7 @@ npm run build
 npm run preview
 ```
 
-## 图片目录约定（后续上传 100 幅）
+## 图片目录约定（100 幅）
 
 请将作品图放在：
 
@@ -24,13 +24,19 @@ npm run preview
 public/images/works/
 ```
 
-建议命名：
+当前页面默认读取你已上传的命名格式：
 
 ```text
-w001.jpg
-w002.jpg
+moon -1.jpg
+moon -2.jpg
 ...
-w100.jpg
+moon -100.jpg
 ```
 
-然后在 `src/App.jsx` 的 `works` 数组中将每条作品的 `image` 字段指向对应文件。
+对应路径写法为：
+
+```text
+/images/works/moon -1.jpg
+```
+
+> 备注：代码中已使用 `encodeURI` 处理文件名里的空格。

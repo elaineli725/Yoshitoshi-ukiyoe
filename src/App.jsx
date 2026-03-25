@@ -8,15 +8,13 @@ const timelineData = [
     year: '1885',
     title: '初刊与开场',
     desc: '系列在秋天开始刊行，确立月下人物的整体基调。',
-    intro:
-      '最初几幅作品已经显出《月百姿》的核心气质：月色、停顿、人物与夜的距离。'
+    intro: '最初几幅作品已经显出《月百姿》的核心气质：月色、停顿、人物与夜的距离。'
   },
   {
     year: '1886',
     title: '系列展开',
     desc: '题材逐渐丰富，月下人物开始形成群像。',
-    intro:
-      '这一阶段里，历史、传说与抒情场景逐渐并置，系列的观看方式开始变得更加多层。'
+    intro: '这一阶段里，历史、传说与抒情场景逐渐并置，系列的观看方式开始变得更加多层。'
   },
   {
     year: '1887–1888',
@@ -32,20 +30,27 @@ const timelineData = [
   }
 ];
 
-const works = [
-  { id: 'w001', title: '荒寺晚钟', year: '1885', phase: '1885', desc: '寺钟与远月并置，开篇即见静默。', image: '/images/works/w001.jpg' },
-  { id: 'w002', title: '桥上薄霜', year: '1885', phase: '1885', desc: '人物在桥头停步，月色制造距离。', image: '/images/works/w002.jpg' },
-  { id: 'w003', title: '夜渡旧港', year: '1885', phase: '1885', desc: '水面与木舟在微光中只剩轮廓。', image: '/images/works/w003.jpg' },
-  { id: 'w004', title: '青灯读札', year: '1886', phase: '1886', desc: '月与灯的双重照明，让情绪更克制。', image: '/images/works/w004.jpg' },
-  { id: 'w005', title: '月下行军', year: '1886', phase: '1886', desc: '历史人物被放进冷夜叙事之中。', image: '/images/works/w005.jpg' },
-  { id: 'w006', title: '雪庭回望', year: '1886', phase: '1886', desc: '回望动作与月色形成短暂停顿。', image: '/images/works/w006.jpg' },
-  { id: 'w007', title: '鹤影与笛', year: '1887', phase: '1887–1888', desc: '传说人物与自然意象被缝合为诗。', image: '/images/works/w007.jpg' },
-  { id: 'w008', title: '帘后之月', year: '1887', phase: '1887–1888', desc: '女性形象被帘幕与月光共同塑形。', image: '/images/works/w008.jpg' },
-  { id: 'w009', title: '鬼火河岸', year: '1888', phase: '1887–1888', desc: '幽灵母题在冷色中呈现克制戏剧性。', image: '/images/works/w009.jpg' },
-  { id: 'w010', title: '残月归人', year: '1889', phase: '1889–1892', desc: '人物与背景关系趋于简练成熟。', image: '/images/works/w010.jpg' },
-  { id: 'w011', title: '月下听潮', year: '1890', phase: '1889–1892', desc: '潮声不可见，只以姿态与留白呈现。', image: '/images/works/w011.jpg' },
-  { id: 'w012', title: '终章夜雪', year: '1892', phase: '1889–1892', desc: '晚期作品沉静凝练，收束整套叙事。', image: '/images/works/w012.jpg' }
-];
+const phaseFromIndex = (idx) => {
+  if (idx <= 20) return { phase: '1885', year: '1885' };
+  if (idx <= 45) return { phase: '1886', year: '1886' };
+  if (idx <= 75) return { phase: '1887–1888', year: idx % 2 === 0 ? '1887' : '1888' };
+  return { phase: '1889–1892', year: `${1889 + ((idx - 76) % 4)}` };
+};
+
+const allWorks = Array.from({ length: 100 }, (_, i) => {
+  const index = i + 1;
+  const phaseMeta = phaseFromIndex(index);
+  return {
+    id: `w${String(index).padStart(3, '0')}`,
+    title: `月百姿 第${index}幅`,
+    year: phaseMeta.year,
+    phase: phaseMeta.phase,
+    desc: `《月百姿》占位说明：第 ${index} 幅，后续可替换为正式作品标题与策展文本。`,
+    image: encodeURI(`/images/works/moon -${index}.jpg`)
+  };
+});
+
+const featuredWorks = allWorks.slice(0, 12);
 
 const navItems = [
   ['首页', 'hero'],
@@ -53,6 +58,7 @@ const navItems = [
   ['时间线', 'timeline'],
   ['阶段展开', 'detail'],
   ['精选作品', 'selected'],
+  ['全部作品', 'all-works'],
   ['为什么是月', 'moon']
 ];
 
@@ -61,28 +67,40 @@ const sectionMotion = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
 };
 
-function WorkCard({ work }) {
+function ArtworkImage({ src, alt, className }) {
+  const [error, setError] = useState(false);
+
+  return (
+    <div className={`relative overflow-hidden rounded-lg border border-haze/20 bg-gradient-to-b from-haze/15 via-panel to-ink ${className}`}>
+      {!error ? (
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+          loading="lazy"
+          onError={() => setError(true)}
+        />
+      ) : (
+        <div className="grid h-full w-full place-content-center text-xs text-moon/70">图片未找到</div>
+      )}
+    </div>
+  );
+}
+
+function WorkCard({ work, compact = false }) {
   return (
     <motion.article
       whileHover={{ y: -4 }}
       className="group rounded-xl border border-haze/20 bg-panel/65 p-4 transition-all duration-500 hover:border-gold/50 hover:shadow-moon"
     >
-      <div className="relative mb-4 h-44 overflow-hidden rounded-lg border border-haze/20 bg-gradient-to-b from-haze/15 via-panel to-ink">
-        <img
-          src={work.image}
-          alt={work.title}
-          className="h-full w-full object-cover opacity-0 transition duration-500 group-hover:scale-105 group-hover:opacity-50"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 grid place-content-center text-xs text-moon/75">Image Placeholder</div>
-      </div>
+      <ArtworkImage src={work.image} alt={work.title} className={compact ? 'mb-3 h-32' : 'mb-4 h-44'} />
       <div className="space-y-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <h3 className="font-serifCn text-lg">{work.title}</h3>
           <span className="text-xs text-haze">{work.year}</span>
         </div>
         <p className="text-xs text-gold">{work.phase}</p>
-        <p className="text-sm text-moon/80">{work.desc}</p>
+        {!compact && <p className="text-sm text-moon/80">{work.desc}</p>}
       </div>
       <Link
         to={`/works/${work.id}`}
@@ -96,7 +114,7 @@ function WorkCard({ work }) {
 
 function WorkDetail() {
   const { id } = useParams();
-  const work = works.find((item) => item.id === id);
+  const work = allWorks.find((item) => item.id === id);
 
   if (!work) {
     return (
@@ -113,12 +131,8 @@ function WorkDetail() {
         <p className="text-sm tracking-[0.2em] text-haze">{work.phase}</p>
         <h1 className="mt-3 font-serifCn text-4xl">{work.title}</h1>
         <p className="mt-2 text-moon/70">{work.year}</p>
-        <div className="mt-8 h-72 rounded-xl border border-haze/25 bg-gradient-to-br from-haze/10 via-panel to-ink grid place-content-center text-sm text-moon/70">
-          作品大图占位（后续替换为真实《月百姿》图像）
-        </div>
-        <p className="mt-8 leading-8 text-moon/85">
-          {work.desc} 这是第一版详情页占位结构，后续可继续补充：作品背景、人物来源、文本题跋、版本信息与高清放大查看功能。
-        </p>
+        <ArtworkImage src={work.image} alt={work.title} className="mt-8 h-72" />
+        <p className="mt-8 leading-8 text-moon/85">{work.desc}</p>
         <Link to="/" className="mt-8 inline-flex rounded-full border border-gold/40 px-5 py-2 text-sm hover:bg-gold/10">返回展览首页</Link>
       </div>
     </main>
@@ -131,7 +145,7 @@ function HomePage() {
   const activePhase = timelineData[active];
 
   const phaseWorks = useMemo(
-    () => works.filter((item) => item.phase === activePhase.year).slice(0, 3),
+    () => allWorks.filter((item) => item.phase === activePhase.year).slice(0, 3),
     [activePhase.year]
   );
 
@@ -144,23 +158,23 @@ function HomePage() {
             {mobileOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
           <nav className="hidden gap-5 text-xs md:flex">
-            {navItems.map(([label, id]) => (
-              <a key={id} href={`#${id}`} className="text-moon/70 transition hover:text-moon">{label}</a>
+            {navItems.map(([label, itemId]) => (
+              <a key={itemId} href={`#${itemId}`} className="text-moon/70 transition hover:text-moon">{label}</a>
             ))}
           </nav>
         </div>
         <AnimatePresence>
           {mobileOpen && (
             <motion.nav initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="border-t border-haze/20 bg-ink/95 p-3 md:hidden">
-              {navItems.map(([label, id]) => (
-                <a key={id} href={`#${id}`} onClick={() => setMobileOpen(false)} className="block py-2 text-sm text-moon/80">{label}</a>
+              {navItems.map(([label, itemId]) => (
+                <a key={itemId} href={`#${itemId}`} onClick={() => setMobileOpen(false)} className="block py-2 text-sm text-moon/80">{label}</a>
               ))}
             </motion.nav>
           )}
         </AnimatePresence>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 pt-24 pb-20 sm:px-6">
+      <main className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
         <motion.section id="hero" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative overflow-hidden rounded-3xl border border-haze/20 bg-gradient-to-b from-panel via-ink to-ink px-8 py-20 sm:px-14">
           <div className="paper absolute inset-0 opacity-25" />
           <div className="relative max-w-3xl space-y-6">
@@ -215,13 +229,21 @@ function HomePage() {
           <div className="mt-8 grid gap-4 md:grid-cols-3">
             {phaseWorks.map((work) => <WorkCard key={work.id} work={work} />)}
           </div>
-          <button className="mt-6 rounded-full border border-haze/40 px-5 py-2 text-sm">查看更多</button>
+          <a href="#all-works" className="mt-6 inline-flex rounded-full border border-haze/40 px-5 py-2 text-sm">查看更多</a>
         </motion.section>
 
         <motion.section id="selected" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-24">
           <h2 className="mb-6 font-serifCn text-3xl">精选作品（12）</h2>
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {works.map((work) => <WorkCard key={work.id} work={work} />)}
+            {featuredWorks.map((work) => <WorkCard key={work.id} work={work} />)}
+          </div>
+        </motion.section>
+
+        <motion.section id="all-works" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="mt-24">
+          <h2 className="mb-6 font-serifCn text-3xl">全部作品（100）</h2>
+          <p className="mb-6 text-sm text-moon/70">已按你上传的文件命名规则读取：/images/works/moon -1.jpg 至 moon -100.jpg。</p>
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {allWorks.map((work) => <WorkCard key={work.id} work={work} compact />)}
           </div>
         </motion.section>
 
