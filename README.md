@@ -54,9 +54,10 @@ moon -100.jpg
 ### 你需要确认
 
 1. GitHub → **Settings → Pages** → Source 选择 **GitHub Actions**。
-2. push 到 `main`。
+2. push 到默认分支（`main` 或 `master`，工作流已兼容这两种命名）。
 3. 打开 **Actions**，确认 `Deploy Vite site to GitHub Pages` 成功（绿色）。
-4. 用这个地址打开：
+4. 如果刚改完 Pages 设置但没有新提交，可在 Actions 里手动点 `Run workflow`。
+5. 用这个地址打开：
 
 ```text
 https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/
