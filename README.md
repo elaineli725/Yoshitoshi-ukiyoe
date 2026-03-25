@@ -72,3 +72,5 @@ https://elaineli725.github.io/Yoshitoshi-ukiyoe/#/works/w001
 如果仍然空白：按 `Ctrl + F5` 强刷，或在浏览器开发者工具里查看 Console / Network 是否有 `assets/*.js` 404。
 
 > 若运行时发生异常，页面会显示“页面加载失败”提示（而非纯白屏），请把该提示中的错误信息发出来。
+
+> 若连错误边界都没显示，但页面出现“页面正在加载…”且不消失，说明入口脚本未加载成功（通常是 `assets/*.js` 或 `/src/main.jsx` 路径问题）。
