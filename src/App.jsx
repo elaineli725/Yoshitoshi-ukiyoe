@@ -243,17 +243,22 @@ function HomePage() {
   return (
     <div className="bg-paper text-moon">
       <header className="fixed inset-x-0 top-0 z-50 border-b border-haze/15 bg-paper/90 backdrop-blur">
-        <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4 sm:px-6">
-          <a href="#hero" className="font-serifCn text-lg">月百姿</a>
-          <button className="md:hidden" onClick={() => setMobileOpen((v) => !v)} aria-label="menu">
-            {mobileOpen ? <X size={18} /> : <Menu size={18} />}
-          </button>
-          <nav className="hidden gap-5 text-xs md:flex">
-            {navItems.map(([label, itemId]) => (
-              <a key={itemId} href={`#${itemId}`} className="text-moon/70 transition hover:text-moon">{label}</a>
-            ))}
-          </nav>
-        </div>
+        <div className="absolute inset-0">
+  {heroBackdropImages.map((src) => (
+    <div key={src} className="relative h-full min-h-[420px]">
+      <img
+        src={src}
+        alt="hero-bg"
+        className="h-full w-full object-cover opacity-60"
+        loading="lazy"
+      />
+      <div className="absolute inset-0 bg-gradient-to-r from-paper/85 via-paper/70 to-paper/90" />
+    </div>
+  ))}
+          const heroBackdropImages = [
+  `${import.meta.env.BASE_URL}images/works/moon -24.jpg`
+];
+</div>
         <AnimatePresence>
           {mobileOpen && (
             <motion.nav initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -6 }} className="border-t border-haze/20 bg-paper/95 p-3 md:hidden">
