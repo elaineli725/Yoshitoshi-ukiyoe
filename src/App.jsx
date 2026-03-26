@@ -30,23 +30,14 @@ const timelineData = [
   }
 ];
 
-const phaseFromIndex = (idx) => {
-  if (idx <= 20) return { phase: '1885', year: '1885' };
-  if (idx <= 45) return { phase: '1886', year: '1886' };
-  if (idx <= 75) return { phase: '1887–1888', year: idx % 2 === 0 ? '1887' : '1888' };
-  return { phase: '1889–1892', year: `${1889 + ((idx - 76) % 4)}` };
 const buildImageCandidates = (index) => {
-  const id = String(index).padStart(3, '0');
+  const base = import.meta.env.BASE_URL;
+
   return [
-    `/images/works/moon -${index}.jpg`,
-    `/images/works/moon-${index}.jpg`,
-    `/images/works/moon(${index}).jpg`,
-    `/images/works/moon(${index}).png`,
-    `/images/works/moon-${index}.png`,
-    `/images/works/moon -${index}.png`,
-    `/images/works/${id}.jpg`,
-    `/images/works/${id}.jpeg`,
-    `/images/works/${id}.png`,
+    `${base}images/works/moon -${index}.jpg`,
+    `${base}images/works/moon-${index}.jpg`,
+    `${base}images/works/moon(${index}).jpg`,
+    `${base}images/works/moon(${index}).png`,
   ].map((item) => encodeURI(item));
 };
 
