@@ -8,15 +8,15 @@ const buildImageCandidates = (index) => {
   return [
     `/images/works/moon -${index}.jpg`,
     `/images/works/moon-${index}.jpg`,
-    `/images/works/w${id}.jpg`,
-    `/images/works/w${id}.jpeg`,
-    `/images/works/w${id}.png`,
+    `/images/works/moon(${index}).jpg`,
+    `/images/works/moon(${index}).png`,
+    `/images/works/moon-${index}.png`,
+    `/images/works/moon -${index}.png`,
     `/images/works/${id}.jpg`,
     `/images/works/${id}.jpeg`,
-    `/images/works/${id}.png`
+    `/images/works/${id}.png`,
   ].map((item) => encodeURI(item));
 };
-
 
 const workMetadata = {
   'moon -1': {
