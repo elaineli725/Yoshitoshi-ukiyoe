@@ -35,9 +35,8 @@ const buildImageCandidates = (index) => {
 
   return [
     `${base}images/works/moon -${index}.jpg`,
-    `${base}images/works/moon-${index}.jpg`,
-    `${base}images/works/moon(${index}).jpg`,
-    `${base}images/works/moon(${index}).png`,
+    `${base}images/works/moon -${index}.jpeg`,
+    `${base}images/works/moon -${index}.png`,
   ].map((item) => encodeURI(item));
 };
 
