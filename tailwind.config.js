@@ -4,13 +4,13 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#f3be49',
-        paper: '#f7cb62',
-        moon: '#5b3d0c',
-        haze: '#b88329',
-        gold: '#f7e8b7',
+        ink: '#f9bf45',
+        paper: '#f9bf45',
+        moon: '#4e3307',
+        haze: '#a97522',
+        gold: '#f6e1a3',
         crimson: '#9b3149',
-        panel: '#fad57d'
+        panel: '#f7c860'
       },
       fontFamily: {
         serifCn: ['"Noto Serif SC"', '"Songti SC"', 'serif'],

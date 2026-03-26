@@ -84,6 +84,10 @@ const sectionMotion = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
 };
 
+const heroBackdropImages = [
+  encodeURI('/images/works/moon -24.jpg')
+];
+
 function ArtworkImage({ src, srcList = [], alt, className }) {
   const candidates = srcList.length > 0 ? srcList : src ? [src] : [];
   const [index, setIndex] = useState(0);
@@ -201,7 +205,15 @@ function HomePage() {
 
       <main className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
         <motion.section id="hero" variants={sectionMotion} initial="hidden" whileInView="show" viewport={{ once: true }} className="relative overflow-hidden rounded-3xl border border-haze/20 bg-gradient-to-b from-panel via-paper to-paper px-8 py-20 sm:px-14">
-          <div className="paper absolute inset-0 opacity-25" />
+          <div className="absolute inset-0">
+            {heroBackdropImages.map((src, idx) => (
+              <div key={src} className="relative h-full min-h-[420px]">
+                <img src={src} alt={`hero-bg-${idx + 1}`} className="h-full w-full object-cover opacity-32" loading="lazy" />
+                <div className="absolute inset-0 bg-gradient-to-r from-paper/85 via-paper/70 to-paper/90" />
+              </div>
+            ))}
+          </div>
+          <div className="paper absolute inset-0 opacity-40" />
           <div className="relative max-w-3xl space-y-6">
             <p className="font-serifCn text-6xl leading-tight sm:text-7xl">月百姿</p>
             <p className="font-serifCn text-2xl text-moon/85">月冈芳年笔下的月夜人间</p>
