@@ -4,9 +4,49 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>月百姿｜月冈芳年笔下的月夜人间</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Noto Sans SC', sans-serif;
+        background: #f5c75a;
+        color: #5b3d0c;
+      }
+      .boot-fallback {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+      }
+      .boot-card {
+        max-width: 760px;
+        border: 1px solid rgba(184, 131, 41, 0.35);
+        border-radius: 16px;
+        background: rgba(250, 223, 150, 0.72);
+        padding: 20px;
+        line-height: 1.7;
+      }
+      .boot-card code {
+        color: #8b5610;
+      }
+    </style>
   </head>
-  <body class="bg-ink text-moon">
-    <div id="root"></div>
+  <body>
+    <div id="root">
+      <main class="boot-fallback">
+        <section class="boot-card">
+          <h1>页面正在加载…</h1>
+          <p>如果你长时间只看到这个提示，说明前端脚本没有成功加载，而不是内容为空。</p>
+          <p>
+            请检查浏览器开发者工具 Network/Console，重点看是否存在
+            <code>assets/*.js</code>
+            或
+            <code>/src/main.jsx</code>
+            404。
+          </p>
+          <p>然后把第一条红色报错复制给我，我会继续精确修复。</p>
+        </section>
+      </main>
+    </div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

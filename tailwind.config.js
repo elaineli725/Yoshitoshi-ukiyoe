@@ -4,19 +4,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        ink: '#0b0d12',
-        moon: '#e8edf7',
-        haze: '#8f9bb5',
-        gold: '#9e8450',
-        crimson: '#672a34',
-        panel: '#111724'
+        ink: '#f9bf45',
+        paper: '#f9bf45',
+        moon: '#4e3307',
+        haze: '#a97522',
+        gold: '#f6e1a3',
+        crimson: '#9b3149',
+        panel: '#f7c860'
       },
       fontFamily: {
         serifCn: ['"Noto Serif SC"', '"Songti SC"', 'serif'],
         sansCn: ['"Noto Sans SC"', '"PingFang SC"', 'sans-serif']
       },
       boxShadow: {
-        moon: '0 0 40px rgba(158,132,80,0.2)'
+        moon: '0 0 36px rgba(250, 231, 181, 0.45)'
       }
     }
   },
