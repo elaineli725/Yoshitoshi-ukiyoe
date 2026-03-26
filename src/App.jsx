@@ -159,28 +159,32 @@ const sectionMotion = {
 
 const heroBackdropImages = [encodeURI('/images/works/moon -24.jpg')];
 
-function ArtworkImage({ srcList = [], alt, className }) {
-  const [index, setIndex] = useState(0);
-  const currentSrc = srcList[index];
-  const exhausted = !currentSrc;
+function HomePage() {
+  const [mobileOpen, setMobileOpen] = useState(false);
+
+  const heroBackdropImages = [
+    `${import.meta.env.BASE_URL}images/works/moon -24.jpg`
+  ];
 
   return (
-    <div className={`relative overflow-hidden rounded-lg border border-haze/30 bg-gradient-to-b from-paper to-panel/80 ${className}`}>
-      {!exhausted ? (
-        <img
-          src={currentSrc}
-          alt={alt}
-          className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-          loading="lazy"
-          onError={() => setIndex((prev) => prev + 1)}
-        />
-      ) : (
-        <div className="grid h-full w-full place-content-center text-center text-xs leading-6 text-haze">
-          图片未找到
-          <br />
-          请检查 public/images/works 下文件名
+    <div className="bg-paper text-moon">
+      <header className="fixed inset-x-0 top-0 z-50 border-b border-haze/15 bg-paper/90 backdrop-blur">
+
+        <div className="absolute inset-0">
+          {heroBackdropImages.map((src) => (
+            <div key={src} className="relative h-full min-h-[420px]">
+              <img
+                src={src}
+                alt="hero-bg"
+                className="h-full w-full object-cover opacity-60"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-r from-paper/85 via-paper/70 to-paper/90" />
+            </div>
+          ))}
         </div>
-      )}
+
+      </header>
     </div>
   );
 }
