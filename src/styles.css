@@ -12,16 +12,16 @@
 body {
   @apply m-0 bg-paper font-sansCn text-moon antialiased;
   background-image:
-    radial-gradient(circle at 18% 12%, rgba(184, 141, 55, 0.17) 0 26px, transparent 28px),
-    radial-gradient(circle at 82% 24%, rgba(184, 141, 55, 0.13) 0 20px, transparent 22px),
-    radial-gradient(circle at 30% 78%, rgba(184, 141, 55, 0.11) 0 24px, transparent 26px),
-    repeating-linear-gradient(8deg, rgba(125, 104, 76, 0.05) 0, rgba(125, 104, 76, 0.05) 1px, transparent 1px, transparent 6px),
-    linear-gradient(180deg, #fdf8ef 0%, #f5eee2 100%);
+    radial-gradient(circle at 20% 16%, rgba(255, 241, 199, 0.48) 0 120px, transparent 140px),
+    radial-gradient(circle at 84% 10%, rgba(232, 179, 72, 0.32) 0 180px, transparent 210px),
+    radial-gradient(circle at 28% 72%, rgba(245, 218, 150, 0.28) 0 200px, transparent 240px),
+    repeating-linear-gradient(9deg, rgba(173, 119, 31, 0.06) 0, rgba(173, 119, 31, 0.06) 1px, transparent 1px, transparent 7px),
+    linear-gradient(180deg, #f8cf68 0%, #f2c351 48%, #f0bf47 100%);
 }
 
 .paper {
   background-image:
-    radial-gradient(circle at 10% 18%, rgba(184, 141, 55, 0.15) 0, transparent 34%),
-    radial-gradient(circle at 80% 72%, rgba(184, 141, 55, 0.1) 0, transparent 30%),
-    repeating-linear-gradient(0deg, rgba(122, 102, 74, 0.06) 0, rgba(122, 102, 74, 0.06) 1px, transparent 1px, transparent 5px);
+    radial-gradient(circle at 12% 16%, rgba(255, 248, 224, 0.36) 0, transparent 35%),
+    radial-gradient(circle at 82% 74%, rgba(246, 224, 156, 0.24) 0, transparent 33%),
+    repeating-linear-gradient(0deg, rgba(160, 112, 33, 0.08) 0, rgba(160, 112, 33, 0.08) 1px, transparent 1px, transparent 6px);
 }
