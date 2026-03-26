@@ -3,6 +3,38 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, Moon, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
 
+const timelineData = [
+  {
+    year: '1885',
+    title: '初刊与开场',
+    desc: '系列在秋天开始刊行，确立月下人物的整体基调。',
+    intro: '最初几幅作品已经显出《月百姿》的核心气质：月色、停顿、人物与夜的距离。'
+  },
+  {
+    year: '1886',
+    title: '系列展开',
+    desc: '题材逐渐丰富，月下人物开始形成群像。',
+    intro: '这一阶段里，历史、传说与抒情场景逐渐并置，系列的观看方式开始变得更加多层。'
+  },
+  {
+    year: '1887–1888',
+    title: '人物群像渐丰',
+    desc: '历史、女性、传说与诗意场景持续扩展。',
+    intro: '《月百姿》逐渐不只是一个主题系列，而更像一座在月夜中展开的人物剧场。'
+  },
+  {
+    year: '1889–1892',
+    title: '晚期成熟与完成',
+    desc: '系列在芳年晚年走向成熟，并最终完成。',
+    intro: '晚期阶段的作品更显沉静、凝练，也让整套系列拥有了完整的终章感。'
+  }
+];
+
+const phaseFromIndex = (idx) => {
+  if (idx <= 20) return { phase: '1885', year: '1885' };
+  if (idx <= 45) return { phase: '1886', year: '1886' };
+  if (idx <= 75) return { phase: '1887–1888', year: idx % 2 === 0 ? '1887' : '1888' };
+  return { phase: '1889–1892', year: `${1889 + ((idx - 76) % 4)}` };
 const buildImageCandidates = (index) => {
   const id = String(index).padStart(3, '0');
   return [
