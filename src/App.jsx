@@ -102,7 +102,9 @@ const workMetadata = {
     jp: '吉野山夜半月　伊贺局',
     desc: `这幅作品描绘的是南朝女官伊贺局在吉野月夜中遭遇“化物”的一幕。
 
-故事见于室町时期说话集《吉野拾遺》“伊賀局化物に遇ふ事”。伊賀局侍奉新待贤门院，后醍醐天皇去世后，吉野一带不断传出有“化物”出没，宫中人心惶惶。在一个炎热的夏夜，大约六月十日左右，伊贺局漫步于花园，见一棵高大的松树枝条低垂，明月高悬，便情不自禁地吟诵起一首诗：“被风吹散，渴望清凉，月光栖于袖中。”突然，从不该有人出现的松树顶端，传来一声古老诗句的吟诵：“心静则身清。”她抬头望去，只见一个形似恶魔的妖怪，双翼展开，双目比月光还要明亮，正俯视着伊贺夫人。她询问妖怪的名字，妖怪回答说“藤原基任”，说自己生前曾为新待贤门院尽心效力，却在死后长期未获追荐，因此怨念不散，才化作此形，夜夜作祟。他请求伊賀局代为转达，希望门院为自己修法超度，并说明《法华经》最为相宜。伊賀局回宫后如实禀报，门院听后深感惭愧，次日便命法师连续为其做《法华经》佛事。此后，吉野再无怪异。`
+故事见于室町时期说话集《吉野拾遺》“伊賀局化物に遇ふ事”。伊賀局侍奉新待贤门院，后醍醐天皇去世后，吉野一带不断传出有“化物”出没，宫中人心惶惶。
+
+在一个炎热的夏夜，大约六月十日左右，伊贺局漫步于花园，见一棵高大的松树枝条低垂，明月高悬，便情不自禁地吟诵起一首诗：“被风吹散，渴望清凉，月光栖于袖中。”突然，从不该有人出现的松树顶端，传来一声古老诗句的吟诵：“心静则身清。”她抬头望去，只见一个形似恶魔的妖怪，双翼展开，双目比月光还要明亮，正俯视着伊贺夫人。她询问妖怪的名字，妖怪回答说“藤原基任”，说自己生前曾为新待贤门院尽心效力，却在死后长期未获追荐，因此怨念不散，才化作此形，夜夜作祟。他请求伊賀局代为转达，希望门院为自己修法超度，并说明《法华经》最为相宜。伊賀局回宫后如实禀报，门院听后深感惭愧，次日便命法师连续为其做《法华经》佛事。此后，吉野再无怪异。`
   },
   'moon -13': {
     title: '捣衣闻月',
@@ -144,7 +146,7 @@ const allWorks = Array.from({ length: 100 }, (_, i) => {
 const featuredWorks = allWorks.slice(0, 12);
 
 const navItems = [
-  ['首页', 'moon -24'],
+  ['首页', 'hero'],
   ['关于《月百姿》', 'about'],
   ['精品图片', 'selected'],
   ['结语', 'closing']
@@ -155,9 +157,7 @@ const sectionMotion = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } }
 };
 
-const heroBackdropImages = [
-  encodeURI(`${import.meta.env.BASE_URL}images/works/moon -24.jpg`)
-];
+const heroBackdropImage = encodeURI(`${import.meta.env.BASE_URL}images/works/moon -24.jpg`);
 
 
 function WorkImage({ work, className = '', alt, fill = false }) {
@@ -314,24 +314,15 @@ function HomePage() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl border border-haze/20 bg-gradient-to-b from-panel via-paper to-paper px-8 py-20 sm:px-14"
+          className="relative overflow-hidden rounded-3xl border border-haze/20 px-8 py-20 sm:px-14"
+          style={{
+            backgroundImage: `linear-gradient(90deg, rgba(249, 201, 94, 0.86) 0%, rgba(249, 201, 94, 0.62) 45%, rgba(249, 201, 94, 0.9) 100%), url(${heroBackdropImage})`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center 28%',
+            backgroundRepeat: 'no-repeat',
+            minHeight: '560px'
+          }}
         >
-          <div className="absolute inset-0">
-            {heroBackdropImages.map((src) => (
-              <div key={src} className="relative h-full min-h-[560px]">
-                <img
-                  src={src}
-                  alt="hero-bg"
-                  className="h-full w-full object-cover opacity-50"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-r from-paper/88 via-paper/72 to-paper/92" />
-              </div>
-            ))}
-          </div>
-
-          <div className="paper absolute inset-0 opacity-40" />
-
           <div className="relative max-w-3xl space-y-6">
             <p className="font-serifCn text-6xl leading-tight sm:text-7xl">月百姿</p>
             <p className="font-serifCn text-2xl text-moon/85">月冈芳年笔下的月夜人间</p>
