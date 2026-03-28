@@ -5,7 +5,7 @@ export default {
     extend: {
       colors: {
         ink: '#f9bf45',
-        paper: '#f9bf45',
+        paper: '#e3916e',
         moon: '#4e3307',
         haze: '#a97522',
         gold: '#f6e1a3',
