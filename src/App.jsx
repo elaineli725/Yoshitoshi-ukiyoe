@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
@@ -610,9 +610,9 @@ function WorkCard({ work }) {
   );
 }
 
-function WorkDetail() {
+function WorkDetail({ works }) {
   const { id } = useParams();
-  const work = allWorks.find((item) => item.id === id);
+  const work = works.find((item) => item.id === id);
 
   if (!work) {
     return (
@@ -649,7 +649,7 @@ function WorkDetail() {
   );
 }
 
-function WorksGalleryPage() {
+function WorksGalleryPage({ works }) {
   return (
     <main className="mx-auto max-w-[1200px] px-4 py-10 text-moon sm:px-6">
       <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
@@ -659,7 +659,7 @@ function WorksGalleryPage() {
         </Link>
       </div>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {allWorks.map((work) => (
+        {works.map((work) => (
           <WorkCard key={work.id} work={work} />
         ))}
       </div>
@@ -822,11 +822,43 @@ function HomePage() {
 }
 
 export function App() {
+  const [works, setWorks] = useState(() => buildWorks(workMetadata));
+
+  useEffect(() => {
+    let cancelled = false;
+
+    const loadExternalMetadata = async () => {
+      try {
+        const response = await fetch(`${import.meta.env.BASE_URL}data/workMetadata.json`, { cache: 'no-store' });
+        if (!response.ok) {
+          return;
+        }
+
+        const payload = await response.json();
+        const metadataMap = Array.isArray(payload)
+          ? Object.fromEntries(payload.map((item) => [item.fileBase, item]))
+          : payload;
+
+        if (!cancelled && metadataMap && typeof metadataMap === 'object') {
+          setWorks(buildWorks({ ...workMetadata, ...metadataMap }));
+        }
+      } catch (error) {
+        // Ignore external metadata load errors and keep built-in data.
+      }
+    };
+
+    loadExternalMetadata();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
-      <Route path="/works" element={<WorksGalleryPage />} />
-      <Route path="/works/:id" element={<WorkDetail />} />
+      <Route path="/works" element={<WorksGalleryPage works={works} />} />
+      <Route path="/works/:id" element={<WorkDetail works={works} />} />
     </Routes>
   );
 }
