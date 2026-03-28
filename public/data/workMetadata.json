@@ -1,4 +1,94 @@
 {
+  "moon -1": {
+    "fileBase": "moon -1",
+    "title": "月百姿 第1幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 1 幅作品的正式说明。"
+  },
+  "moon -2": {
+    "fileBase": "moon -2",
+    "title": "月百姿 第2幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 2 幅作品的正式说明。"
+  },
+  "moon -3": {
+    "fileBase": "moon -3",
+    "title": "月百姿 第3幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 3 幅作品的正式说明。"
+  },
+  "moon -4": {
+    "fileBase": "moon -4",
+    "title": "月百姿 第4幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 4 幅作品的正式说明。"
+  },
+  "moon -5": {
+    "fileBase": "moon -5",
+    "title": "月百姿 第5幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 5 幅作品的正式说明。"
+  },
+  "moon -6": {
+    "fileBase": "moon -6",
+    "title": "月百姿 第6幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 6 幅作品的正式说明。"
+  },
+  "moon -7": {
+    "fileBase": "moon -7",
+    "title": "月百姿 第7幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 7 幅作品的正式说明。"
+  },
+  "moon -8": {
+    "fileBase": "moon -8",
+    "title": "月百姿 第8幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 8 幅作品的正式说明。"
+  },
+  "moon -9": {
+    "fileBase": "moon -9",
+    "title": "月百姿 第9幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 9 幅作品的正式说明。"
+  },
+  "moon -10": {
+    "fileBase": "moon -10",
+    "title": "月百姿 第10幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 10 幅作品的正式说明。"
+  },
+  "moon -11": {
+    "fileBase": "moon -11",
+    "title": "月百姿 第11幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 11 幅作品的正式说明。"
+  },
+  "moon -12": {
+    "fileBase": "moon -12",
+    "title": "月百姿 第12幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 12 幅作品的正式说明。"
+  },
+  "moon -13": {
+    "fileBase": "moon -13",
+    "title": "月百姿 第13幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 13 幅作品的正式说明。"
+  },
+  "moon -14": {
+    "fileBase": "moon -14",
+    "title": "月百姿 第14幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 14 幅作品的正式说明。"
+  },
+  "moon -15": {
+    "fileBase": "moon -15",
+    "title": "月百姿 第15幅",
+    "jp": "",
+    "desc": "请在 public/data/workMetadata.json 中补充第 15 幅作品的正式说明。"
+  },
   "moon -16": {
     "fileBase": "moon -16",
     "title": "月百姿 第16幅",
