@@ -299,23 +299,24 @@ function HomePage() {
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="relative overflow-hidden rounded-3xl border border-haze/20 px-8 py-20 sm:px-14"
+          className="relative overflow-hidden rounded-3xl border border-haze/30 px-8 py-20 text-[#f5ead8] shadow-[0_28px_56px_rgba(38,21,15,0.26)] sm:px-14"
           style={{
-            backgroundImage: `linear-gradient(90deg, rgba(249, 201, 94, 0.86) 0%, rgba(249, 201, 94, 0.62) 45%, rgba(249, 201, 94, 0.9) 100%), url(${heroBackdropImage})`,
+            backgroundImage: `linear-gradient(110deg, rgba(29, 18, 19, 0.82) 2%, rgba(68, 42, 39, 0.56) 42%, rgba(24, 14, 16, 0.86) 100%), radial-gradient(circle at 82% 14%, rgba(240, 194, 124, 0.2) 0, rgba(240, 194, 124, 0) 34%), url(${heroBackdropImage})`,
             backgroundSize: 'cover',
-            backgroundPosition: 'center 28%',
+            backgroundPosition: 'center 24%',
             backgroundRepeat: 'no-repeat',
+            backgroundBlendMode: 'multiply, screen, normal',
             minHeight: '720px',
             maxHeight: '750px'
           }}
         >
           <div className="relative max-w-3xl space-y-6">
             <p className="font-serifCn text-6xl leading-tight sm:text-7xl">月百姿</p>
-            <p className="font-serifCn text-2xl text-moon/85">月冈芳年笔下的月夜人间</p>
+            <p className="font-serifCn text-2xl text-[#f6ebda]/90">月冈芳年笔下的月夜人间</p>
             <div className="flex flex-wrap gap-3">
               <Link
                 to="/works"
-                className="rounded-full border border-gold/60 bg-gold/10 px-5 py-2 text-sm"
+                className="rounded-full border border-[#f1e1c4]/55 bg-[#211517]/38 px-5 py-2 text-sm text-[#f7ecd9] backdrop-blur-[1px]"
               >
                 Begin Wandering
               </Link>
