@@ -1,34 +1,7 @@
 import { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { Menu, Moon, X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { Link, Route, Routes, useParams } from 'react-router-dom';
-
-const timelineData = [
-  {
-    year: '1885',
-    title: '初刊与开场',
-    desc: '系列在秋天开始刊行，确立月下人物的整体基调。',
-    intro: '最初几幅作品已经显出《月百姿》的核心气质：月色、停顿、人物与夜的距离。'
-  },
-  {
-    year: '1886',
-    title: '系列展开',
-    desc: '题材逐渐丰富，月下人物开始形成群像。',
-    intro: '这一阶段里，历史、传说与抒情场景逐渐并置，系列的观看方式开始变得更加多层。'
-  },
-  {
-    year: '1887–1888',
-    title: '人物群像渐丰',
-    desc: '历史、女性、传说与诗意场景持续扩展。',
-    intro: '《月百姿》逐渐不只是一个主题系列，而更像一座在月夜中展开的人物剧场。'
-  },
-  {
-    year: '1889–1892',
-    title: '晚期成熟与完成',
-    desc: '系列在芳年晚年走向成熟，并最终完成。',
-    intro: '晚期阶段的作品更显沉静、凝练，也让整套系列拥有了完整的终章感。'
-  }
-];
 
 const buildImageCandidates = (index) => {
   const base = import.meta.env.BASE_URL;
@@ -122,8 +95,7 @@ const workMetadata = {
     desc: `“吼哕”一词来源于日语中狐狸的叫声，意指狐狸。该画取材于日本的稻荷神传说：一只老狐狸，或者说白狐，全家都被猎人捕获，于是化身为猎人的叔叔——少林寺的僧人白藏祖，前往猎人处。他以稻荷神的法力以及妖狐玉藻前的传说为依据，宣扬狐狸诅咒的恐怖，劝说猎人停止捕狐。在返回的路上，他发现了猎人丢弃的用来诱捕狐狸的豆腐，抵挡不住诱惑，卸下伪装，回到豆腐旁。猎人察觉到这一点，设下陷阱，狐狸显露真身，落入陷阱。但最终，他设法挣脱束缚，逃脱了。
 
 这幅作品描绘了化身为白藏祖的老狐狸在返程途中，于弯月下观察着周围的环境。他或许是因为成功说服了猎人而沾沾自喜，又或许是因为找到了诱饵——炸豆腐，即将显露出真面目。环绕着白藏祖的蒲苇叶和羽毛并不写实，反而似乎是为了营造一种奇异而诱人的氛围。这或许是某个被猎人引诱而丧命的家庭的亡灵。他藏起的狐狸尾巴撑起长袍后摆的模样，以及他手持拐杖转身的动作，都颇具滑稽之感……弯月的明亮似乎恰到好处地衬托出老狐狸即将显露真面目的景象。`
-  }
-};
+  },
 'moon -16': {
     title: '月辉如晴雪',
     jp: '月辉如晴雪 梅花似照星 可怜金镜転 庭上玉房馨　菅原道真',
@@ -571,12 +543,10 @@ const allWorks = Array.from({ length: 100 }, (_, i) => {
   };
 });
 
-const featuredWorks = allWorks.slice(0, 12);
-
 const navItems = [
   ['首页', 'hero'],
   ['关于《月百姿》', 'about'],
-  ['精品图片', 'selected'],
+  ['作者简介', 'author'],
   ['结语', 'closing']
 ];
 
@@ -679,6 +649,24 @@ function WorkDetail() {
   );
 }
 
+function WorksGalleryPage() {
+  return (
+    <main className="mx-auto max-w-[1200px] px-4 py-10 text-moon sm:px-6">
+      <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="font-serifCn text-3xl">作品展示（100）</h1>
+        <Link to="/" className="inline-flex items-center rounded-full border border-haze/40 px-4 py-2 text-sm">
+          ← 返回首页
+        </Link>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {allWorks.map((work) => (
+          <WorkCard key={work.id} work={work} />
+        ))}
+      </div>
+    </main>
+  );
+}
+
 function HomePage() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -735,7 +723,7 @@ function HomePage() {
         </AnimatePresence>
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 pb-20 pt-24 sm:px-6">
+      <main className="mx-auto max-w-[1200px] px-4 pb-20 pt-24 sm:px-6">
         <motion.section
           id="hero"
           variants={sectionMotion}
@@ -748,24 +736,20 @@ function HomePage() {
             backgroundSize: 'cover',
             backgroundPosition: 'center 28%',
             backgroundRepeat: 'no-repeat',
-            minHeight: '560px'
+            minHeight: '720px',
+            maxHeight: '750px'
           }}
         >
           <div className="relative max-w-3xl space-y-6">
             <p className="font-serifCn text-6xl leading-tight sm:text-7xl">月百姿</p>
             <p className="font-serifCn text-2xl text-moon/85">月冈芳年笔下的月夜人间</p>
-            <p className="whitespace-pre-line text-moon/80">
-              一百幅画，一百次月光落下的瞬间。{`\n`}
-              这不是静止的全集，{`\n`}
-              而是一部在岁月中逐渐展开的月夜长卷。
-            </p>
             <div className="flex flex-wrap gap-3">
-              <a
-                href="#selected"
+              <Link
+                to="/works"
                 className="rounded-full border border-gold/60 bg-gold/10 px-5 py-2 text-sm"
               >
-                浏览精品
-              </a>
+                Begin Wandering
+              </Link>
             </div>
           </div>
         </motion.section>
@@ -787,18 +771,21 @@ function HomePage() {
         </motion.section>
 
         <motion.section
-          id="selected"
+          id="author"
           variants={sectionMotion}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="mt-24"
+          className="mt-24 rounded-2xl border border-haze/20 bg-panel/50 p-8"
         >
-          <h2 className="mb-6 font-serifCn text-3xl">精品图片展示（12）</h2>
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {featuredWorks.map((work) => (
-              <WorkCard key={work.id} work={work} />
-            ))}
+          <h2 className="font-serifCn text-3xl">作者简介</h2>
+          <div className="mt-5 max-w-5xl space-y-4 whitespace-pre-line leading-8 text-moon/80">
+            <p>
+              月冈芳年是歌川国芳的徒弟，被称为“最后的浮世绘师”。年轻时，芳年主要创作武者绘，展现幕府人物。曾一度热衷于“无惨绘”，与师兄落合芳几比拼，画面极为血腥令人不适，最终芳年获胜。芳年为此颇为得意，陆续创作了很多无惨绘的作品，被人称为“浑身是血的芳年”。
+            </p>
+            <p>
+              晚年的芳年沉迷酗酒，身体多病，但也创造出了许多令后世称赞的作品，如讲述 100 个与月亮相关故事的《月百姿》系列。
+            </p>
           </div>
         </motion.section>
 
@@ -838,6 +825,7 @@ export function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/works" element={<WorksGalleryPage />} />
       <Route path="/works/:id" element={<WorkDetail />} />
     </Routes>
   );
