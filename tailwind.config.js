@@ -5,12 +5,12 @@ export default {
     extend: {
       colors: {
         ink: '#f9bf45',
-        paper: '#f9bf45',
+        paper: '#e3916e',
         moon: '#4e3307',
         haze: '#a97522',
         gold: '#f6e1a3',
         crimson: '#9b3149',
-        panel: '#f7c860'
+        panel: '#c28368'
       },
       fontFamily: {
         serifCn: ['"Noto Serif SC"', '"Songti SC"', 'serif'],
