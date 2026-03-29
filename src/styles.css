@@ -12,11 +12,16 @@
 body {
   @apply m-0 bg-paper font-sansCn text-moon antialiased;
   background-image:
-    radial-gradient(circle at 20% 16%, rgba(255, 241, 199, 0.48) 0 120px, transparent 140px),
-    radial-gradient(circle at 84% 10%, rgba(232, 166, 43, 0.34) 0 180px, transparent 210px),
-    radial-gradient(circle at 28% 72%, rgba(245, 218, 150, 0.28) 0 200px, transparent 240px),
-    repeating-linear-gradient(9deg, rgba(146, 98, 21, 0.07) 0, rgba(146, 98, 21, 0.07) 1px, transparent 1px, transparent 7px),
-    linear-gradient(180deg, #f9ca5b 0%, #f9bf45 50%, #efb73d 100%);
+    radial-gradient(circle at 82% 16%, rgba(246, 225, 163, 0.92) 0 190px, rgba(210, 158, 65, 0.76) 220px, transparent 236px),
+    radial-gradient(circle at 82% 16%, rgba(255, 246, 210, 0.24) 0 36px, transparent 40px),
+    radial-gradient(circle at 79% 12%, rgba(255, 255, 240, 0.12) 0 10px, transparent 14px),
+    radial-gradient(circle at 87% 22%, rgba(196, 131, 39, 0.2) 0 8px, transparent 13px),
+    repeating-radial-gradient(circle at 82% 16%, rgba(173, 122, 35, 0.07) 0 2px, rgba(0, 0, 0, 0) 2px 8px),
+    radial-gradient(circle at 15% 20%, rgba(255, 232, 194, 0.1) 0, transparent 40%),
+    radial-gradient(circle at 75% 75%, rgba(255, 216, 170, 0.09) 0, transparent 42%),
+    repeating-linear-gradient(24deg, rgba(131, 70, 31, 0.06) 0, rgba(131, 70, 31, 0.06) 1px, transparent 1px, transparent 6px),
+    repeating-linear-gradient(-18deg, rgba(255, 220, 180, 0.04) 0, rgba(255, 220, 180, 0.04) 1px, transparent 1px, transparent 9px),
+    linear-gradient(180deg, #eba07f 0%, #e3916e 46%, #d68461 100%);
   background-attachment: fixed;
 }
 
