@@ -17,6 +17,7 @@ body {
     radial-gradient(circle at 28% 72%, rgba(245, 218, 150, 0.28) 0 200px, transparent 240px),
     repeating-linear-gradient(9deg, rgba(146, 98, 21, 0.07) 0, rgba(146, 98, 21, 0.07) 1px, transparent 1px, transparent 7px),
     linear-gradient(180deg, #f9ca5b 0%, #f9bf45 50%, #efb73d 100%);
+  background-attachment: fixed;
 }
 
 .paper {
