@@ -126,6 +126,12 @@ function WorkImage({ work, className = '', alt, fill = false }) {
   const [fallbackIndex, setFallbackIndex] = useState(1);
   const [failed, setFailed] = useState(false);
 
+  useEffect(() => {
+    setCurrentSrc(work.imageCandidates[0]);
+    setFallbackIndex(1);
+    setFailed(false);
+  }, [work.fileBase, work.imageCandidates]);
+
   const handleError = () => {
     if (fallbackIndex < work.imageCandidates.length) {
       setCurrentSrc(work.imageCandidates[fallbackIndex]);
@@ -158,7 +164,7 @@ function WorkImage({ work, className = '', alt, fill = false }) {
 function WorkCard({ work }) {
   return (
     <Link
-      to={`/works/${work.id}`}
+      to={`/works/id/${work.id}`}
       className="group overflow-hidden rounded-2xl border border-haze/30 bg-panel/35 transition hover:-translate-y-0.5 hover:shadow-moon"
     >
       <div className="w-full" style={{ aspectRatio: '2363 / 3443' }}>
@@ -307,6 +313,9 @@ function HomePage() {
                 </Link>
                 <Link to="/author" className="rounded-full border border-[#efe1cc]/65 bg-[#1e1820]/45 px-5 py-2 text-[#f2e8da]">
                   作者介绍
+                </Link>
+                <Link to="/works" className="rounded-full border border-[#efe1cc]/65 bg-[#1e1820]/45 px-5 py-2 text-[#f2e8da]">
+                  总浏览（100）
                 </Link>
               </div>
             </div>
